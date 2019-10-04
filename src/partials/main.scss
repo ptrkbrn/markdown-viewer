@@ -1,0 +1,94 @@
+$accent-color: rgb(18, 114, 224);
+$block-color: rgb(245, 245, 245);
+
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+%window {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 1rem;
+    background-color: $accent-color;
+    padding: 1rem;
+    color: white;
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .title {
+        font-weight: 600;
+        margin-bottom: .25rem;
+      }
+      .description {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.is-maximized {
+  height: 90vh !important;
+  width: 90vw !important;
+  position: absolute !important;
+  z-index: 100 !important;
+}
+
+.editor {
+  @extend %window;
+  width: 45rem;
+  textarea {
+    min-height: 20rem;
+    resize: vertical;
+    border: none;
+    padding: .5rem;
+  }
+}
+
+.preview {
+  @extend %window;
+  text-align: left;
+  width: 60rem;
+  min-height: 20rem;
+  .output {
+    padding: .5rem;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  background-color: $block-color;
+}
+
+blockquote {
+  background-color: $block-color;
+  margin: 0;
+  margin-left: 2rem;
+  border-left: 3px solid $accent-color;
+  padding: 1rem;
+  width: 50%;
+
+  p {
+    margin: 0;
+  }
+}
