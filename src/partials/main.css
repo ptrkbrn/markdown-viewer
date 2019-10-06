@@ -28,6 +28,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   margin: 1rem;
+  background-color: white;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -48,8 +49,12 @@ body {
           align-items: center;
   min-height: 1rem;
   background-color: #1272e0;
-  padding: 1rem;
+  padding: .5rem 1rem;
   color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .editor .top-bar .title-block, .preview .top-bar .title-block {
@@ -74,11 +79,53 @@ body {
   font-size: 12px;
 }
 
+.editor:active, .preview:active {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
 .is-maximized {
-  height: 90vh !important;
-  width: 90vw !important;
+  height: 100% !important;
+  width: 100% !important;
   position: absolute !important;
   z-index: 100 !important;
+}
+
+.is-minimized {
+  display: block;
+  width: 15rem !important;
+  height: 2rem;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0 1rem;
+  -webkit-transform: none !important;
+          transform: none !important;
+}
+
+.is-minimized .content {
+  display: none;
+}
+
+.is-minimized .description {
+  display: none;
+}
+
+.is-minimized:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.is-minimized:active .top-bar {
+  background-color: #1f7fed;
+}
+
+.wrap:active {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
 .editor {
@@ -100,6 +147,34 @@ body {
 
 .preview .output {
   padding: .5rem;
+  height: 40rem;
+  overflow: scroll;
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  max-height: 2rem;
+}
+
+.icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
 }
 
 code {

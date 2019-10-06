@@ -1,6 +1,7 @@
 import React from 'react';
 import marked from 'marked';
 import './App.css';
+import toggleWindow from './scripts';
 
 const renderer = new marked.Renderer();
 
@@ -16,30 +17,32 @@ marked.setOptions({
 
 function Editor(props) {
   return (
-    <div className="editor">
+    <div className="editor window">
       <div className="top-bar">
         <div className="title-block">
           <span className="title">Editor</span>
           <span className="description">Enter markup text</span>
         </div>
-        <i className="far fa-window-maximize" />
+        <button onClick={toggleWindow} className="icon far fa-window-minimize" />
       </div>
-      <textarea id="editor" value={props.input} onChange={props.onChange} />
+      <textarea id="editor" className="content" value={props.input} onChange={props.onChange} />
     </div>
   );
 }
 
 function Preview({ output }) {
   return (
-    <div className="preview">
-      <div className="top-bar">
-        <div className="title-block">
-          <span className="title">Preview</span>
-          <span className="description">Markup text is rendered here</span>
+    <div className="wrap">
+      <div className="preview window">
+        <div className="top-bar">
+          <div className="title-block">
+            <span className="title">Preview</span>
+            <span className="description">Markup text is rendered here</span>
+          </div>
+          <button onClick={toggleWindow} className="icon far fa-window-minimize" />
         </div>
-        <i className="far fa-window-maximize" />
-      </div>
-      <div className="output" id="preview" dangerouslySetInnerHTML={output} />
+        <div className="output content" id="preview" dangerouslySetInnerHTML={output} />
+      </div>        
     </div>
   );
 }
@@ -75,6 +78,73 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
     this.createMarkup = this.createMarkup.bind(this);
   }
 
+  componentDidMount() {
+    var dragItem = document.querySelector(".editor");
+    var container = document.querySelector(".App");
+
+    var active = false;
+    var currentX;
+    var currentY;
+    var initialX;
+    var initialY;
+    var xOffset = 0;
+    var yOffset = 0;
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+    function dragStart(e) {
+      if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+      console.log("start drag")
+      console.log(e.target)
+      if (e.target === dragItem.firstElementChild) {
+        active = true;
+      }
+    }
+
+    function dragEnd(e) {
+      initialX = currentX;
+      initialY = currentY;
+
+      active = false;
+    }
+
+    function drag(e) {
+      if (active) {
+      
+        e.preventDefault();
+      
+        if (e.type === "touchmove") {
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+        } else {
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+        console.log(currentX, currentY);
+        setTranslate(currentX, currentY, dragItem);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+  }
+
   handleChange(e) {
     this.setState({
       input: e.target.value,
@@ -90,6 +160,7 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
       <div className="App">
         <Editor input={this.state.input} onChange={this.handleChange} />
         <Preview output={this.createMarkup()} />
+        <div className="taskbar" />
       </div>
     );
   }
