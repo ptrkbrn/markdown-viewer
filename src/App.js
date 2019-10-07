@@ -17,15 +17,20 @@ marked.setOptions({
 
 function Editor(props) {
   return (
-    <div className="editor window">
-      <div className="top-bar">
-        <div className="title-block">
-          <span className="title">Editor</span>
-          <span className="description">Enter markup text</span>
+    <div className="wrap">
+      <div className="editor window">
+        <div className="top-bar">
+          <div className="left">
+            <i className="icon fas fa-edit" />
+            <div className="title-block">
+              <span className="title">Editor</span>
+              <span className="description">Enter markup text</span>
+            </div>
+          </div>
+          <button onClick={toggleWindow} className="icon far fa-window-minimize" />
         </div>
-        <button onClick={toggleWindow} className="icon far fa-window-minimize" />
+        <textarea id="editor" className="content" value={props.input} onChange={props.onChange} />
       </div>
-      <textarea id="editor" className="content" value={props.input} onChange={props.onChange} />
     </div>
   );
 }
@@ -35,14 +40,17 @@ function Preview({ output }) {
     <div className="wrap">
       <div className="preview window">
         <div className="top-bar">
-          <div className="title-block">
-            <span className="title">Preview</span>
-            <span className="description">Markup text is rendered here</span>
+          <div className="left">
+            <i className="icon fas fa-eye" />
+            <div className="title-block">
+              <span className="title">Preview</span>
+              <span className="description">Markup text is rendered here</span>
+            </div>
           </div>
           <button onClick={toggleWindow} className="icon far fa-window-minimize" />
         </div>
         <div className="output content" id="preview" dangerouslySetInnerHTML={output} />
-      </div>        
+      </div>
     </div>
   );
 }
@@ -79,41 +87,29 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
   }
 
   componentDidMount() {
-    var dragItem = document.querySelector(".editor");
-    var container = document.querySelector(".App");
+    const container = document.querySelector('.App');
 
-    var active = false;
-    var currentX;
-    var currentY;
-    var initialX;
-    var initialY;
-    var xOffset = 0;
-    var yOffset = 0;
-
-    container.addEventListener("touchstart", dragStart, false);
-    container.addEventListener("touchend", dragEnd, false);
-    container.addEventListener("touchmove", drag, false);
-
-    container.addEventListener("mousedown", dragStart, false);
-    container.addEventListener("mouseup", dragEnd, false);
-    container.addEventListener("mousemove", drag, false);
+    let active = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
 
     function dragStart(e) {
-      if (e.type === "touchstart") {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-      } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-      }
-      console.log("start drag")
-      console.log(e.target)
-      if (e.target === dragItem.firstElementChild) {
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+
+      console.log('start drag');
+      console.log(e.target);
+      if (e.target.classList.contains('top-bar')) {
         active = true;
+        e.target.closest('.window').style.zIndex = "10";
       }
     }
 
-    function dragEnd(e) {
+    function dragEnd() {
       initialX = currentX;
       initialY = currentY;
 
@@ -122,16 +118,12 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
 
     function drag(e) {
       if (active) {
-      
+        const dragItem = e.target.closest('.window');
+        console.log(dragItem);
         e.preventDefault();
-      
-        if (e.type === "touchmove") {
-          currentX = e.touches[0].clientX - initialX;
-          currentY = e.touches[0].clientY - initialY;
-        } else {
-          currentX = e.clientX - initialX;
-          currentY = e.clientY - initialY;
-        }
+
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
 
         xOffset = currentX;
         yOffset = currentY;
@@ -141,8 +133,11 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
     }
 
     function setTranslate(xPos, yPos, el) {
-      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
     }
+    container.addEventListener('mousedown', dragStart, false);
+    container.addEventListener('mouseup', dragEnd, false);
+    container.addEventListener('mousemove', drag, false);
   }
 
   handleChange(e) {

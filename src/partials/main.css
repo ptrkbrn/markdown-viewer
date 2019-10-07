@@ -1,5 +1,16 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-image: url("../assets/react_logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   padding: 2rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -57,7 +68,28 @@ body {
           user-select: none;
 }
 
-.editor .top-bar .title-block, .preview .top-bar .title-block {
+.editor .top-bar .left, .preview .top-bar .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.editor .top-bar .left .icon, .preview .top-bar .left .icon {
+  margin-right: 1rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 30px;
+}
+
+.editor .top-bar .left .title-block, .preview .top-bar .left .title-block {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -70,12 +102,12 @@ body {
           align-items: flex-start;
 }
 
-.editor .top-bar .title-block .title, .preview .top-bar .title-block .title {
+.editor .top-bar .left .title-block .title, .preview .top-bar .left .title-block .title {
   font-weight: 600;
   margin-bottom: .25rem;
 }
 
-.editor .top-bar .title-block .description, .preview .top-bar .title-block .description {
+.editor .top-bar .left .title-block .description, .preview .top-bar .left .title-block .description {
   font-size: 12px;
 }
 
@@ -94,7 +126,7 @@ body {
 .is-minimized {
   display: block;
   width: 15rem !important;
-  height: 2rem;
+  min-height: 0 !important;
   -webkit-box-shadow: none;
           box-shadow: none;
   margin: 0 1rem;
@@ -106,7 +138,11 @@ body {
   display: none;
 }
 
-.is-minimized .description {
+.is-minimized .top-bar .left .icon {
+  font-size: 20px;
+}
+
+.is-minimized .top-bar .left .description {
   display: none;
 }
 
@@ -166,7 +202,7 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  max-height: 2rem;
+  max-height: 2.5rem;
 }
 
 .icon {
