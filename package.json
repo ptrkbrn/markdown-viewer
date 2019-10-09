@@ -1,7 +1,7 @@
 {
   "name": "markdown-viewer",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
@@ -48,5 +48,5 @@
   "bugs": {
     "url": "https://github.com/ptrkbrn/markdown-viewer/issues"
   },
-  "homepage": "https://github.com/ptrkbrn/markdown-viewer#readme"
+  "homepage": "https://github.com/ptrkbrn/markdown-viewer"
 }

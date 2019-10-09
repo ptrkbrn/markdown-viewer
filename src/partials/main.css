@@ -114,6 +114,20 @@ body {
 .editor:active, .preview:active {
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
           box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.wrap {
+  position: relative;
+}
+
+.wrap:active {
+  z-index: 10;
 }
 
 .is-maximized {
@@ -155,15 +169,6 @@ body {
   background-color: #1f7fed;
 }
 
-.wrap:active {
-  -webkit-transform: scale(1.01);
-          transform: scale(1.01);
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-}
-
 .editor {
   width: 45rem;
 }
@@ -203,6 +208,7 @@ body {
       -ms-flex-pack: start;
           justify-content: flex-start;
   max-height: 2.5rem;
+  z-index: 100;
 }
 
 .icon {

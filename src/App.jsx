@@ -5,10 +5,12 @@ import toggleWindow from './scripts';
 
 const renderer = new marked.Renderer();
 
+// clicked links open in a new tab.
 renderer.link = function (href, title, text) {
   return `<a href="${href}" target="_blank">${text}</a>`;
 };
 
+// carriage return inserts linebreak.
 marked.setOptions({
   renderer,
   gfm: true,
@@ -96,6 +98,7 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
     let initialY;
     let xOffset = 0;
     let yOffset = 0;
+    let zindex = 10;
 
     function dragStart(e) {
       initialX = e.clientX - xOffset;
@@ -103,24 +106,31 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
 
       console.log('start drag');
       console.log(e.target);
+      console.log(zindex);
+
       if (e.target.classList.contains('top-bar')) {
         active = true;
-        e.target.closest('.window').style.zIndex = "10";
+        const selectedWindow = e.target.closest('.wrap');
+        const siblings = document.querySelectorAll('.wrap');
+        // Array.prototype.map.call(siblings,
+          // eslint-disable-next-line no-param-reassign, no-unused-expressions
+        //   (sibling) => { sibling === selectedWindow ? sibling.style.zIndex = '10' : sibling.style.zIndex = '1'; });
+        selectedWindow.style.zIndex = zindex;
       }
     }
 
     function dragEnd() {
       initialX = currentX;
       initialY = currentY;
-
+      zindex += 1;
       active = false;
     }
 
     function drag(e) {
       if (active) {
-        const dragItem = e.target.closest('.window');
+        const dragItem = e.target.closest('.wrap:active');
         console.log(dragItem);
-        e.preventDefault();
+        e.stopPropagation();
 
         currentX = e.clientX - initialX;
         currentY = e.clientY - initialY;
@@ -133,6 +143,10 @@ Ok so that\'s what markdown is. Now I\'m going to use it to talk about... Aqua T
     }
 
     function setTranslate(xPos, yPos, el) {
+      if (el === null) {
+        dragEnd();
+        return;
+      }
       el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
     }
     container.addEventListener('mousedown', dragStart, false);
