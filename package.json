@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
+    "marked": "^0.7.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.2.0",
-    "marked": "^0.7.0"
+    "react-scripts": "3.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,7 +37,8 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.15.1",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "gh-pages": "^2.1.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": ".eslintrc.js",
@@ -48,5 +51,5 @@
   "bugs": {
     "url": "https://github.com/ptrkbrn/markdown-viewer/issues"
   },
-  "homepage": "https://github.com/ptrkbrn/markdown-viewer"
+  "homepage": "https://ptrkbrn.github.com/markdown-viewer"
 }
