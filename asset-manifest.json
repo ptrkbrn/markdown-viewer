@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ptrkbrn/markdown-viewer/static/css/main.52e55914.chunk.css",
-    "main.js": "/ptrkbrn/markdown-viewer/static/js/main.86af6d72.chunk.js",
-    "main.js.map": "/ptrkbrn/markdown-viewer/static/js/main.86af6d72.chunk.js.map",
-    "runtime-main.js": "/ptrkbrn/markdown-viewer/static/js/runtime-main.39be1674.js",
-    "runtime-main.js.map": "/ptrkbrn/markdown-viewer/static/js/runtime-main.39be1674.js.map",
-    "static/js/2.1c8d42da.chunk.js": "/ptrkbrn/markdown-viewer/static/js/2.1c8d42da.chunk.js",
-    "static/js/2.1c8d42da.chunk.js.map": "/ptrkbrn/markdown-viewer/static/js/2.1c8d42da.chunk.js.map",
-    "index.html": "/ptrkbrn/markdown-viewer/index.html",
-    "precache-manifest.355a31c0e13d612b1f3c0bd96ba06db4.js": "/ptrkbrn/markdown-viewer/precache-manifest.355a31c0e13d612b1f3c0bd96ba06db4.js",
-    "service-worker.js": "/ptrkbrn/markdown-viewer/service-worker.js",
-    "static/css/main.52e55914.chunk.css.map": "/ptrkbrn/markdown-viewer/static/css/main.52e55914.chunk.css.map",
-    "static/media/main.css": "/ptrkbrn/markdown-viewer/static/media/react_logo.3a8ea2a0.png"
+    "main.css": "/markdown-viewer/static/css/main.3b6481ee.chunk.css",
+    "main.js": "/markdown-viewer/static/js/main.5a684aad.chunk.js",
+    "main.js.map": "/markdown-viewer/static/js/main.5a684aad.chunk.js.map",
+    "runtime-main.js": "/markdown-viewer/static/js/runtime-main.872922ca.js",
+    "runtime-main.js.map": "/markdown-viewer/static/js/runtime-main.872922ca.js.map",
+    "static/js/2.1c8d42da.chunk.js": "/markdown-viewer/static/js/2.1c8d42da.chunk.js",
+    "static/js/2.1c8d42da.chunk.js.map": "/markdown-viewer/static/js/2.1c8d42da.chunk.js.map",
+    "index.html": "/markdown-viewer/index.html",
+    "precache-manifest.88f8e44a577cf2006ba298ee03edaa65.js": "/markdown-viewer/precache-manifest.88f8e44a577cf2006ba298ee03edaa65.js",
+    "service-worker.js": "/markdown-viewer/service-worker.js",
+    "static/css/main.3b6481ee.chunk.css.map": "/markdown-viewer/static/css/main.3b6481ee.chunk.css.map",
+    "static/media/main.css": "/markdown-viewer/static/media/react_logo.3a8ea2a0.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.39be1674.js",
+    "static/js/runtime-main.872922ca.js",
     "static/js/2.1c8d42da.chunk.js",
-    "static/css/main.52e55914.chunk.css",
-    "static/js/main.86af6d72.chunk.js"
+    "static/css/main.3b6481ee.chunk.css",
+    "static/js/main.5a684aad.chunk.js"
   ]
 }
